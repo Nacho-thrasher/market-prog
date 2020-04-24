@@ -35,7 +35,7 @@ class admin{
         $this->nameProducto = $nameP;
         $this->precioProducto = $precioP;
         $this->existProducto = $exisP;
-       
+       // esto no funciona porq no encuentra los id para el iner join
         // primera
         $db1 = new Conexion();
         $sql1 = "INSERT INTO `productos`(`nombre_prod`,`precio`,`existencia`) VALUES ('$this->nameProducto','$this->precioProducto','$this->existProducto')";
