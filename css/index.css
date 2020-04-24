@@ -1,0 +1,105 @@
+body{font-family: Arial; background-color: #274e55; box-sizing: border-box; padding: 100px;}
+
+/* seccion form */
+form{
+    background-color: #f6f4ea;
+    border-radius: 0 0 3px 3px;
+    color: rgb(126, 126, 126);
+    font-size: 0.8em;
+    padding: 20px;
+    margin: 0 auto;
+    width: 300px;
+}
+input{
+    border: 0;
+    outline: none;
+    background-color: white;
+    width: 280px;
+}
+
+.field{
+    border: solid 1px #c76345	;
+    border-radius: 0 4px 4px 0; 
+    padding: 10px;
+    width: 240px;
+    height: 13px;
+}
+
+/* .field:focus{
+    border-color: rgb(7, 8, 8);
+} */
+/* para el boton================================== */
+.center-content{
+    text-align: center;
+}
+
+.field-container div{
+    display: inline-block;
+    vertical-align: top;
+}
+/* iconos ======================================== */
+.field-container i{
+    background-color: #eee;
+    border-radius: 4px 0 0 4px; 
+    color: #888;
+    padding: 10px 10px 11px 10px;
+    border: solid 1px #ccc;
+    max-height: 35px;
+    margin-right: -5px;
+    vertical-align: top;
+}
+/* titulo================================ */
+#menu ul{
+    list-style: none;
+    margin: 0;
+    margin-bottom: 0.2rem;
+    padding: 0;
+}
+
+#menu ul li{
+    display: inline-block;
+    width: 100%;
+}
+
+#menu ul li a{
+    background-color:#ffffff;
+    color: #c76345;
+    text-align: center;
+    font-size: 1.2rem;
+    display: block;
+    padding: 20px 20px;
+    text-decoration: none;
+}
+/* #menu ul li a:hover{
+    background-color: 	#dfbe19;
+} */
+
+#formularios, #menu{
+    margin: 0 auto;
+    width: 340px;
+}
+
+.active{
+    background-color: 	#f6f4ea !important;
+}
+
+#form_register{
+    display: none;
+}
+
+/* validate ===========================*/
+.error{
+    background-color: 	#f5da9c;
+    font-size: 12px;
+    padding: 10px;
+    text-transform: capitalize;
+}
+.correcto{
+    background-color: #A0DEA7;
+    font-size: 12px;
+    padding: 10px;
+    text-transform: capitalize;
+}
+a:hover{
+    color: grey;
+}

@@ -1,0 +1,16 @@
+body{font-family: Arial; background-color: #6795a0;}
+
+.table-orange{
+    background-color: #d05f4c;
+    border-color: #d05f4c !important;
+    color: white;
+}
+.title{
+    font-size: 2rem;
+}
+.title-2{
+    font-size: 1.2rem;
+}
+.bg-white-grey{
+    background-color: #ff6f61;
+}
