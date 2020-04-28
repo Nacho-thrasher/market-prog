@@ -78,7 +78,8 @@
             <input name="exisP" type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input placeholder">
         </div>
         <div class="form-group">
-        <input type="submit" name="submit" class="btn btn-green" value="Registrarse">
+        <input type="submit" name="submit" class="btn btn-primary" value="Guardar Producto">
+        <button type="button" class="btn btn-primary"><a class='text-white' href="index.php">Regresar</a></button>
         </div>
         
     </form>

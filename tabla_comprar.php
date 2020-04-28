@@ -16,17 +16,17 @@ class Tabla_comp{
         $i=1; $a = 1;
         while ($fila = $res->fetch_array()) {
         echo '<tr>';   
-        echo '<th scope="row">'.$fila['id_productos'].'</th>';
+        echo '<th scope="row">'.$i.'</th>';
         echo '<td>' .$fila['tipo']. '</td>';
         echo '<td>' .$fila['nombre_m']. '</td>';
         echo '<td>' .$fila['nombre_prod']. '</td>';
         echo '<td>' .$fila['precio']. '</td>';
         echo '<td>' .$fila['existencia']. '</td>';
         if (isset($_SESSION['admin'])) {
-            if ($_SESSION['admin'] == 'Nacho') {
+            if ($_SESSION['admin'] == 'Nacho' || $_SESSION['admin'] == 'nacho') {
               echo '<td><a href="./editar.php?id='.$fila["id_productos"] .'"><i class="fas fa-edit"></i></a></td>';
               
-              echo '<td><a href="./borrar.php"><i class="fas fa-trash-alt"></a></i></td>';
+              echo '<td><a href="./borrar.php?id='.$fila["id_productos"] .'"><i class="fas fa-trash-alt"></i></a></td>';
             }
         }
         echo '<td>    
@@ -43,7 +43,7 @@ class Tabla_comp{
              ';
                 
             
-        
+
         echo '</tr>';
         $i++;
         

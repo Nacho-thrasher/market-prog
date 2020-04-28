@@ -48,8 +48,6 @@ class admin{
         $db1->query($sql1);
         }  
        // esto no funciona porq no encuentra los id para el iner join
-        
-
     }
 
 

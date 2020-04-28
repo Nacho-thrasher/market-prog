@@ -14,6 +14,7 @@ session_start();
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/principal.css">
     <script src="https://kit.fontawesome.com/85cbbbc4f0.js" crossorigin="anonymous"></script>
+    <script src="js/jquery-3.1.1.min.js"></script>
     <title>Hello, world!</title>
 </head>
 
@@ -102,6 +103,9 @@ session_start();
                             </tr>
                         </tbody>
                     </form>
+                     <!-- Modal -->
+    
+    
                     </table>
                     <div class="title-2 text-center">
                     <?php echo isset($_SESSION['admin']) ? '' : 'Para comprar debes iniciar sesion o registrarte.'; ?>
@@ -111,15 +115,7 @@ session_start();
         </div>
     </div>
     <!-- =============================== -->
-    <!-- <script>
-        function completarPendiente(e) {
-            var id= "form" + e.id;
-            var formulario = document.getElementById(id);
-            formulario.submit();
-        }
-    </script> -->
     
-
 
 
 
