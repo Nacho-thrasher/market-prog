@@ -22,7 +22,13 @@ class Tabla_comp{
         echo '<td>' .$fila['nombre_prod']. '</td>';
         echo '<td>' .$fila['precio']. '</td>';
         echo '<td>' .$fila['existencia']. '</td>';
-            
+        if (isset($_SESSION['admin'])) {
+            if ($_SESSION['admin'] == 'Nacho') {
+              echo '<td><a href="./editar.php?id='.$fila["id_productos"] .'"><i class="fas fa-edit"></i></a></td>';
+              
+              echo '<td><a href="./borrar.php"><i class="fas fa-trash-alt"></a></i></td>';
+            }
+        }
         echo '<td>    
                 <div class="custom-control custom-switch">
                     <input type="checkbox" class="custom-control-input" name="customSwitch-'.$fila['id_productos'].'" id="customSwitch-'.$fila['id_productos'].'">

@@ -1,3 +1,21 @@
+<?php
+include_once './conexion.php';
+class value{
+        
+    public function values(){
+        $id = $_GET['id'];
+        $db = new Conexion();
+        $sql = "Select * from productos where id_productos = '$id'";
+        $res= $db->query($sql);
+        $i=0;
+        while ($filas = $res->fetch_array()) {
+    //  <option value="soltero">soltero</option>
+        
+    $i++;   
+        }
+    }  
+}                    
+?>
 <!doctype html>
 <html lang="en">
 
@@ -17,11 +35,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 mt-4 mx-auto">
-                <h1>Agregar productos</h1>
+                <h1>Editar Productos</h1>
             <form action="#" id="form_session" method="post">
         <!-- php validacion -->
         <?php
-            include_once './admin.php';
+            
 
                     if (isset($_POST['submit'])) {
                         $tipoP = $_POST['tipo_producto'];
@@ -30,6 +48,9 @@
                         $nameP = $_POST['nameP'];
                         $precioP = $_POST['precioP'];
                         $exisP = $_POST['exisP'];
+
+                        $id = $_GET['id'];
+                        echo $id;
 
                         $reg2 = new admin();
                         $reg2 ->Marca($nameM, $logoM);
@@ -46,11 +67,7 @@
                         <select class="form-control" id="inlineFormCustomSelect" name="tipo_producto">
                             <option selected>Elije</option>
                             <!-- cargar funcion tipo de productos -->
-                            <?php
-                            include_once './adm-prods/tipo_prod.php';
-                            $tp = new Agregar();
-                            $tp ->tipos_prods();
-                            ?>
+                            <!--  -->
                         </select>
             <!--  -->
         <div class="form-group">
@@ -66,7 +83,7 @@
             <!--  -->
         <div class="form-group">
             <label for="formGroupExampleInput2">Descripcion: </label>
-            <input name="nameP" type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input placeholder">
+            <input name="nameP" type="text" class="form-control" id="formGroupExampleInput2" placeholder="<?php echo $filas['nombre_prod'] ?>">
             <!-- nombre prod -->
           </div>          
         <div class="form-group">
@@ -101,3 +118,6 @@
 </body>
 
 </html>
+<?php
+
+?>
