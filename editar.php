@@ -110,7 +110,9 @@ class value{
                 ?>
                     <!-- fin php validacion -->
                     <!-- tipo prod -->
-                    <label for="inlineFormCustomSelect">tipo de producto:</label>
+                    <div class=" pt-2">
+                        <label for="inlineFormCustomSelect">tipo de producto:</label>
+                    </div>
                     <select class="form-control mx-auto w-50" id="inlineFormCustomSelect" name="tipo_producto" aria-describedby="tipo">
                         <!-- cargar funcion tipo de productos -->
                         <?php
@@ -172,9 +174,10 @@ class value{
                                     ?>">
                     </div>
                     <div class="form-group text-center">
-                        <input type="submit" name="submit" class="btn btn-primary" value="Guardar Cambios">
-                        <button type="button" class="btn btn-primary"><a class='text-white'
-                                href="index.php">Regresar</a></button>
+                    <button type="button" class="btn btn-primary"><a class='text-white'
+                                href="index.php">Regresar</a></button>    
+                    <input type="submit" name="submit" class="btn btn-success" value="Guardar Cambios">
+                        
                     </div>
 
                 </form>

@@ -21,13 +21,13 @@
 <body class='bg-green'>
     <div class="container">
         <div class="row">
-            <div class="col-12 bg-clear mt-3 p-3 pb-1 text-center">
+            <div class="col-6 mx-auto bg-clear mt-3 p-3 pb-1 text-center">
                 <!--TEXTO TITULO ACTUAL --------------------------------------------------------------------------------->
                 <a href="#" class="align-middle text-dark active">Registro</a>    
             </div>
         </div>
         <div class="row">
-            <div class="col-12 bg-clear mt-2 p-3 mb-4 text-center">
+            <div class="col-6 mx-auto bg-clear mt-2 p-3 mb-4 text-center">
                 <!-- SECCION FORM --------------------------------------------------------------------------------------->
                 <div id="formularios" class=''>
                 <form action="#" id="form_session" method="post">

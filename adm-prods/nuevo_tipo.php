@@ -55,10 +55,12 @@
                             placeholder="ej: cerveza">
                     </div>
                     <div class="form-group text-center">
-                        <input type="submit" name="newTipo" class="btn btn-primary" value="Guardar">
-                        
+                           
                         <button type="button" class="btn btn-primary"><a class='text-white'
                                 href="../admin_registro.php">Regresar</a></button>
+
+                        <input type="submit" name="newTipo" class="btn btn-success" value="Guardar">
+                     
                     </div>
 
                 </form>

@@ -30,13 +30,13 @@ session_start();
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Features </a>
+                    <a class="nav-link" href="#">Categorias </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
+                    <a class="nav-link" href="#">Marcas</a>
                 </li>
             </ul>
             <span class="navbar-text">
@@ -61,14 +61,14 @@ session_start();
         <div class="row">
             <div class="col-12 mt-5">
                 <div class="bg-light p-2 text-table shadow-sm rounded">
-                    <div class="title text-center text-success">
+                    <div class="title text-center text-success ">
                       <?php 
                       if (isset($_SESSION['admin'])) {
-                          if ($_SESSION['admin'] == 'Nacho' || $_SESSION['admin'] == 'nacho') {
+                          if ($_SESSION['admin'] == 'Nacho' || $_SESSION['admin'] == 'nacho' || $_SESSION['admin'] == 'NACHO') {
                             echo '<a href="./admin_registro.php">Agregar productos</a>';
                           }
                           else{
-                            echo $_SESSION['admin'];
+                            echo 'Lista de productos para '.$_SESSION['admin'];
                           }
                       }
                       else{
@@ -86,6 +86,7 @@ session_start();
                                 <th scope="col">descripcion</th>
                                 <th scope="col">precio</th>
                                 <th scope="col">unidades</th>
+                                <!-- <th scope="col">anadir <i class="fas fa-cart-plus"></i></th> -->
                             </tr>
                         </thead>
                         <tbody>
@@ -96,21 +97,40 @@ session_start();
                                 $table = new Tabla_comp();
                                 echo $table->tabla();    
                               }
-                              else{
+                              else{                
                                 include_once './tabla_inicial.php';
                                 $table = new Tabla_ini();
                                 echo $table->tabla();
-                              }
+                            }
                             ?>
                             </tr>
                         </tbody>
                     </form>
-                     <!-- Modal -->
-    
     
                     </table>
                     <div class="title-2 text-center text-success">
-                    <?php echo isset($_SESSION['admin']) ? '' : 'Para comprar debes iniciar sesion o registrarte.'; ?>
+                    <?php 
+                        if (isset($_SESSION['admin'])) {
+                            if ($_SESSION['admin'] != 'Nacho' & $_SESSION['admin'] != 'nacho' & $_SESSION['admin'] != 'NACHO') {
+                                // anadiendo el boton submitir
+                                include_once 'tabla_comprar.php';
+                                $car = new Tabla_comp();
+                                echo $car->anadir_carrito();
+                                // otra parte
+                                if (isset($_POST['ag_carrito'])) {
+                                    include_once './carrito_us/carrito_us.php';
+
+                                    $prod_carrito = $_POST['anadir'];
+                                    
+                                    $reg4 = new Carrito();
+                                    $reg4 ->carritos($prod_carrito);
+                                }
+                            }
+                        }
+                        else {
+                            echo 'Para comprar debes iniciar sesion o registrarte.';
+                        }
+                    ?>
                     </div>
                 </div>
             </div>

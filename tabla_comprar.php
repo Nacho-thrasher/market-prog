@@ -2,8 +2,10 @@
 include_once './conexion.php';
 class Tabla_comp{
     
+    
     public function __construct()
-    {        
+    {   
+        
     }
     public function tabla(){
         $db = new Conexion();
@@ -19,7 +21,7 @@ class Tabla_comp{
         echo '<td>' .$fila['precio']. '</td>';
         echo '<td>' .$fila['existencia']. '</td>';
         if (isset($_SESSION['admin'])) {
-            if ($_SESSION['admin'] == 'Nacho' || $_SESSION['admin'] == 'nacho') {
+            if ($_SESSION['admin'] == 'nacho' || $_SESSION['admin'] == 'Nacho' || $_SESSION['admin'] == 'NACHO') {
             // A EDITAR
               echo '<td><a href="./editar.php?id='.$fila["id_productos"] .'"><i class="fas fa-edit"></i></a></td>';
             // A BORRAR  
@@ -27,23 +29,41 @@ class Tabla_comp{
             }
         }
         // ESTO NO FUNCIONA 
+        // plan agregar el registro al usuario y de ahi mermar el registro
+        // checkbox q pase un id
         echo '<td>    
-                <div class="custom-control custom-switch">
-                    <input type="checkbox" class="custom-control-input" name="customSwitch-'.$fila['id_productos'].'" id="customSwitch-'.$fila['id_productos'].'">
-                     
-                    <label class="custom-control-label" for="customSwitch-'.$fila['id_productos'].'">
-                        <i class="fas fa-shopping-cart"></i>
-                        '.$fila['id_productos'].'
+                <div class="form-check">
+                    <input class="form-check-input" name="anadir" type="checkbox" value="'.$fila["id_productos"] .'" id="' .$fila['nombre_prod']. '">
+                        <label class="form-check-label" for="'.$fila['nombre_prod'].'">
+                        
                     </label>
                 </div>
              </td>
-             
              ';
         echo '</tr>';
         $i++;
-        
         }
         
     }
+    public function anadir_carrito(){
+        $user = $_SESSION['admin']; 
+
+        $db = new Conexion();
+        $sql = "Select * from usuarios where username = ?";
+        $stmt = $db->prepare($sql);
+        $stmt ->bind_param('s', $user);
+        $stmt ->execute();
+        $result = $stmt->get_result();
+        $i=0;
+        while ($row = $result->fetch_assoc()) {
+            $this->user[$i] = $row['username'];
+            $this->id_us[$i] = $row['id_us'];
+            echo '<button type="submit" name="ag_carrito" class="btn btn-dark btn-lg"><a class="text-light" href="./carrito_us/carrito_us.php?id='.$row["id_us"].'">Anadir productos a mi carrito</a></button>';
+            // <a class="text-light" href="./carrito_us/carrito_us.php?id='.$row["id_us"].'">
+            $i++;
+        }   
+    }
+    //fin clase
+    // SELECT u.id_us, u.username, c.id_carrito, c.fecha_pedido, d.id_detC, d.id_productos, d.det_prod, d.precio_uni FROM usuarios u INNER JOIN carritos c ON (u.id_us = c.id_us) join det_carritos d on (c.id_carrito = d.id_carrito)
+    // esta consulta funciona 
 }
-// guardar numero en el input y mandarlo en el post

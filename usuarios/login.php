@@ -63,6 +63,7 @@ class Login
                     echo "</div>";
                     echo "<a class='' href='./cerrar_us.php'>Cerrar sesion.</a></br>";
                     echo "<a href='../index.php'>Ir a Inicio.</a>";
+                    header('location: ../index.php');
                     die();
                  }
                  else {
@@ -78,7 +79,6 @@ class Login
             }
             $i++;
         }
-    
         /* cerrar la sentencia */
         $stmt->close();
     }    

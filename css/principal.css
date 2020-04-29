@@ -1,4 +1,4 @@
-body{font-family: Arial; background-color: #747474 !important;}
+body{font-family: Arial; background-color: 	#31404a !important;}
 
 .table-orange{
     background-color: #d05f4c;
@@ -28,4 +28,7 @@ body{font-family: Arial; background-color: #747474 !important;}
 }
 .bg-red{
     background-color: 	#d77f6f !important;
+}
+.bg-violet{
+    background-color: 	#f6e0b5 !important;
 }

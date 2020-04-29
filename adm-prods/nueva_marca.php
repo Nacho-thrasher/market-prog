@@ -55,10 +55,11 @@
                             placeholder="Url de la imagen">
                     </div>
                     <div class="form-group text-center">
-                        <input type="submit" name="newMarca" class="btn btn-primary" value="Guardar Producto">
-                        
                         <button type="button" class="btn btn-primary"><a class='text-white'
                                 href="../admin_registro.php">Regresar</a></button>
+
+                        <input type="submit" name="newMarca" class="btn btn-success" value="Guardar">
+                        
                     </div>
 
                 </form>
