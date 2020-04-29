@@ -1,0 +1,23 @@
+/* colores */
+.bg-green{
+    background-color: 	#7ba383 !important;
+}
+.bg-clear{
+    background-color: #ececec !important;
+}
+.text-darkeishon{
+    color: #455258 !important;
+}
+.bg-orange{
+    background-color: #c9a586 !important;
+}
+/* enlaces */
+.enlace{
+    list-style: none !important;
+}
+
+/* otros */
+.error{
+    margin-left: 30%;
+    margin-right: 30%;
+}

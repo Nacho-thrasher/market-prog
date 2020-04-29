@@ -1,4 +1,4 @@
-body{font-family: Arial; background-color: #6795a0;}
+body{font-family: Arial; background-color: #747474 !important;}
 
 .table-orange{
     background-color: #d05f4c;
@@ -11,6 +11,21 @@ body{font-family: Arial; background-color: #6795a0;}
 .title-2{
     font-size: 1.2rem;
 }
-.bg-white-grey{
-    background-color: #ff6f61;
+.bg-mensaje{
+    background-color: #7ba383 !important;
+}
+.text-table{
+    color: #455258 !important;
+}
+.text_blue{
+    color: #507897 !important;
+}
+.bg-blue{
+    background-color: #507897 !important;
+}
+.bg-yellow{
+    background-color: #ffd24c !important;
+}
+.bg-red{
+    background-color: 	#d77f6f !important;
 }

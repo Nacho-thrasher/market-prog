@@ -19,4 +19,4 @@ if (ini_get("session.use_cookies")) {
 // Finalmente, destruir la sesión.
 session_destroy();
 
-header('location:registro.php');
+header('location:form_reg.php');

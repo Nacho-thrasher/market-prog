@@ -5,34 +5,36 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-    <title>Hello, world!</title>
+    <!-- css principal -->
+    <link rel="stylesheet" href="./css/principal.css">
+    <!-- iconos -->
+    <script src="https://kit.fontawesome.com/85cbbbc4f0.js" crossorigin="anonymous"></script>
+    <!-- jqueri -->
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <!-- <link rel="stylesheet" href="./css/"> -->
+    <title>Agregar Producto!</title>
 </head>
 
-<body>
+<body class="bg-yellow">
     <div class="container">
         <div class="row">
-            <div class="col-md-8 mt-4 mx-auto">
-                <h1>Agregar productos</h1>
-            <form action="#" id="form_session" method="post">
-        <!-- php validacion -->
-        <?php
+            <div class="col-md-8 bg-light mt-4 text-seccondary mx-auto">
+                <h2 class="text-center p-2 ">Agregar productos</h2>
+                <form action="#" id="form_session" method="post">
+                    <!-- php validacion -->
+                    <?php
             include_once './admin.php';
 
                     if (isset($_POST['submit'])) {
                         $tipoP = $_POST['tipo_producto'];
                         $nameM = $_POST['nameM'];
-                        $logoM = $_POST['logoM'];
+
                         $nameP = $_POST['nameP'];
                         $precioP = $_POST['precioP'];
                         $exisP = $_POST['exisP'];
-
-                        $reg2 = new admin();
-                        $reg2 ->Marca($nameM, $logoM);
 
                         $reg4 = new admin();
                         $reg4 ->Prod($tipoP,$nameM, $nameP, $precioP, $exisP);
@@ -40,49 +42,72 @@
             // fin validacion==================================
 
             ?>
-        <!-- fin php validacion -->
-        <!-- tipo prod -->
-                        <label for="inlineFormCustomSelect">tipo de producto</label>
-                        <select class="form-control" id="inlineFormCustomSelect" name="tipo_producto">
-                            <option selected>Elije</option>
-                            <!-- cargar funcion tipo de productos -->
-                            <?php
+                    <!-- fin php validacion -->
+                    <!-- tipo prod -->
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="inlineFormCustomSelect">tipo de producto</label>
+                            <select class="form-control mb-1" id="inlineFormCustomSelect" name="tipo_producto">
+                                <option selected>Elije</option>
+                                <!-- cargar funcion tipo de productos -->
+                                <?php
                             include_once './adm-prods/tipo_prod.php';
                             $tp = new Agregar();
                             $tp ->tipos_prods();
                             ?>
-                        </select>
-            <!--  -->
-        <div class="form-group">
-            <!-- idea agregar options con marcas adecuadas al tipo de producto -->
-            <label for="formGroupExampleInput2">Nombre de Marca</label>
-            <input name="nameM" type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input placeholder">
-        </div>
-        <div class="form-group">
-            <!-- subir imagen al servidor prox -->
-            <label for="formGroupExampleInput2">Logo de Marca</label>
-            <input name="logoM" type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input placeholder">
-        </div>
-            <!--  -->
-        <div class="form-group">
-            <label for="formGroupExampleInput2">Descripcion: </label>
-            <input name="nameP" type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input placeholder">
-            <!-- nombre prod -->
-          </div>          
-        <div class="form-group">
-            <label for="formGroupExampleInput2">Precio: </label>
-            <input name="precioP" type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input placeholder">
-        </div>
-        <div class="form-group">
-            <label for="formGroupExampleInput2">Unidades: </label>
-            <input name="exisP" type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input placeholder">
-        </div>
-        <div class="form-group">
-        <input type="submit" name="submit" class="btn btn-primary" value="Guardar Producto">
-        <button type="button" class="btn btn-primary"><a class='text-white' href="index.php">Regresar</a></button>
-        </div>
-        
-    </form>
+                            </select>
+                        </div>
+                        <div class="col-6 text-center mt-2 pt-4">
+                                    <button type="button" class="btn btn-white"><a class='text-dark'
+                                    href="./adm-prods/nuevo_tipo.php">Agregar un nuevo tipo <i class="fas fa-plus-circle"></i></a></button>
+                        </div>
+                    </div>
+                    <!-- marcas -->
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="marca">Marca:</label>
+                            <select class="form-control mb-1" id="marca" name="nameM">
+                                <option selected>Elije</option>
+                                <!-- cargar funcion tipo de productos -->
+                                <?php
+                            include_once './adm-prods/marcas.php';
+                            $m = new Marca();
+                            $m ->marcas();
+                            ?>
+                            </select>
+                        </div>
+                        <div class="col-6 text-center mt-2 pt-4">
+                            <button type="button" class="btn btn-white"><a class='text-dark'
+                                    href="./adm-prods/nueva_marca.php">Agregar nueva marca <i class="fas fa-plus-circle"></i></a></button>
+                        </div>
+                    </div>
+                    <!-- agregar nueva marca con otra consulta -->
+                    <!-- subir imagen servidor -->
+                    <!-- descripcion -->
+                    <div class="form-group">
+                        <label for="formGroupExampleInput2">Descripcion: </label>
+                        <input name="nameP" type="text" class="form-control" id="formGroupExampleInput2"
+                            placeholder="Descripcion del producto">
+                        <!-- nombre prod -->
+                    </div>
+                    <div class="form-group">
+                        <label for="formGroupExampleInput2">Precio: </label>
+                        <input name="precioP" type="text" class="form-control" id="formGroupExampleInput2"
+                            placeholder="ej: 500">
+                    </div>
+                    <div class="form-group">
+                        <label for="formGroupExampleInput2">Unidades: </label>
+                        <input name="exisP" type="text" class="form-control" id="formGroupExampleInput2"
+                            placeholder="ej: 2">
+                    </div>
+                    <div class="form-group text-center">
+                    <button type="button" class="btn btn-primary mr-3"><a class='text-white'
+                                href="index.php">Regresar</a></button>    
+                    <input type="submit" name="submit" class="btn btn-success" value="Guardar Producto">
+                        
+                    </div>
+
+                </form>
 
 
             </div>

@@ -1,90 +1,85 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+include_once '../conexion.php';
+class Login
+{
+    private $nombre_log;
+    private $password_log;
+    private $us;
+    private $pass;
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://kit.fontawesome.com/85cbbbc4f0.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../css/boton.css">
-    <link rel="stylesheet" href="../css/index.css">
-    <title>My Market</title>
-</head>
+    public function __construct()
+    {
+    }
+    public function comprobar_us($nombre, $password){
+        $this->nombre_log = $nombre;
+        $this->password_log = $password;
 
-<body>
-    <!--TEXTO TITULO ACTUAL --------------------------------------------------------------------------------->
-    <div id="menu">
-        <ul>
-            <li><a href="#" class="active">Inicio de sesion</a></li>
-        </ul>
-    </div>
-    <!-- SECCION FORM --------------------------------------------------------------------------------------->
-    <div id="formularios">
-        <form action="#" id="form_session" method="post">
-            <!-- php validacion -->
-            <?php
-            $nombre = "";
-            $password = "";
-
-            if (isset($_POST['usuario'])) {
-                $nombre = $_POST['usuario'];
-                $password = $_POST['password'];
-
-                $campos = array();
-
-                if ($nombre == "") {
-                    array_push($campos, "El campo Nombre no pude estar vacío");
-                }
-                if ($password == "" || strlen($password) <= 5) {
-                    array_push($campos, "El campo Password no puede estar vacío, ni tener menos de 5 caracteres.");
-                }
-
-                if (count($campos) > 0) {
-                    echo "<div class='error'>";
-                    for ($i = 0; $i < count($campos); $i++) {
-                        echo "<li>" . $campos[$i] . "</i>";
-                    }
-                } else {
-                    include_once './login_us.php';
-                    if (isset($_POST['submit'])) {
-                        $nom = $_POST['usuario'];
-                        $pass = $_POST['password'];
-
-                        $comp = new Login();
-                        $comp->login_us($nom, $pass);
-
-                        $type = new Login();
-                        $type->log_tipo($nom, $pass);
-                    }
-                }
-                echo "</div>";
+        $db = new Conexion();
+        $sql = "Select count(*) from usuarios where username = ?";
+        $stmt = $db->prepare($sql);
+        $stmt ->bind_param('s', $this->nombre_log);
+        $stmt ->execute();
+        $result = $stmt->get_result();
+        $i=0;
+        while ($row = $result->fetch_assoc()) {
+            $this->cont_us[$i] = $row['count(*)'];
+            if ($this->cont_us[$i] > 0) {
+                
             }
-            // fin validacion==================================
+            else {
+                echo "<div class='error bg-orange text-light p-3'>";
+                echo "<li> Usuario no encontrado, Registrate perro. </li>";
+            }
+            $i++;
+        }   
+        /* cerrar la sentencia */
+        $stmt->close();
+    }
 
-            ?>
-            <!-- fin php validacion -->
-            <!-- usuario -->
-            <p>Usuario:</p>
-            <div class="field-container">
-                <i class="far fa-user fa-lg" aria-hidden="true"></i>
-                <input name="usuario" type="text" class="field" placeholder="usuario1"> <br />
-            </div>
+    public function comprobar_log($nombre, $password){
+        $this->nombre_log = $nombre;
+        $this->password_log = $password;
 
-            <!-- password -->
-            <p>Contraseña:</p>
-            <div class="field-container">
-                <i class="fa fa-key fa-lg" aria-hidden="true"></i>
-                <input name="password" type="password" class="field" placeholder="*******"> <br />
-            </div>
-            <!-- boton -->
-            <p class="center-content">
-                <input type="hidden" name="accion" value="insert">
-                <input type="submit" name="submit" class="btn btn-green" value="Iniciar sesion"> <br /><br />
-                <a href="registro.php">Registrarse</a>
-            </p>
-            
-        </form>
-    </div>
-    <!-- END SECCION FORM ---------------------------------------------------------------------------------->
-</body>
+        $db = new Conexion();
+        $sql = "Select * from usuarios where username = ?";
+        $stmt = $db->prepare($sql);
+        $stmt ->bind_param('s',$this->nombre_log);
+        $stmt ->execute();
+        $result = $stmt->get_result();
 
-</html>
+        $i=0;
+        while ($row = $result->fetch_assoc()) {
+                $this->us[$i] = $row['username'];
+                $this->pass[$i] = $row['password'];
+
+            if ($this->nombre_log == $this->us[$i]) {
+                //true
+                if (password_verify($this->password_log, $this->pass[$i])) {
+                    session_start();
+                    $_SESSION['admin'] = $this->us[$i];
+                    // Correct password
+                    echo "<div class='error bg-success text-light p-3 mb-2'>";
+                    echo "<li> Bienvenido " .$this->us[$i] . "</li>";
+                    echo "</div>";
+                    echo "<a class='' href='./cerrar_us.php'>Cerrar sesion.</a></br>";
+                    echo "<a href='../index.php'>Ir a Inicio.</a>";
+                    die();
+                 }
+                 else {
+                    echo "<div class='error bg-orange text-light p-3'>";
+                    echo "<li> Usuario o Pass incorrecta. </li>";
+                 }
+                 
+            }
+            else {
+                // echo ' -q paso'.$this->us[$i];
+                // echo $this->nombre_log;
+                ECHO 'NADA';
+            }
+            $i++;
+        }
+    
+        /* cerrar la sentencia */
+        $stmt->close();
+    }    
+}

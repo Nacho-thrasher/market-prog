@@ -22,16 +22,22 @@ include_once './conexion.php';
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-    <title>Hello, world!</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- css principal -->
+    <link rel="stylesheet" href="./css/principal.css">
+    <!-- iconos -->
+    <script src="https://kit.fontawesome.com/85cbbbc4f0.js" crossorigin="anonymous"></script>
+    <!-- jqueri -->
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <!-- <link rel="stylesheet" href="./css/"> -->
+    <title>Borrar Producto!</title>
   </head>
-  <body>
+  <body class='bg-red'>
     <div class="container">
         <div class="row">
-            <div class="col-12 text-center bg-light">
+            <div class="col-12 text-center mt-5 p-5 bg-light">
             <h1 class="text-center">Eliminar!</h1>
 
             <p class="">Esto solo eliminara el producto, desea continuar?</p>

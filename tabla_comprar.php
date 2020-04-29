@@ -1,11 +1,7 @@
 <?php
-include_once './usuarios/conexion.php';
-
+include_once './conexion.php';
 class Tabla_comp{
-    private $tipo = array(); 
-    private $desc = array();
-    private $precio = array();
-    private $exis = array();
+    
     public function __construct()
     {        
     }
@@ -24,11 +20,13 @@ class Tabla_comp{
         echo '<td>' .$fila['existencia']. '</td>';
         if (isset($_SESSION['admin'])) {
             if ($_SESSION['admin'] == 'Nacho' || $_SESSION['admin'] == 'nacho') {
+            // A EDITAR
               echo '<td><a href="./editar.php?id='.$fila["id_productos"] .'"><i class="fas fa-edit"></i></a></td>';
-              
+            // A BORRAR  
               echo '<td><a href="./borrar.php?id='.$fila["id_productos"] .'"><i class="fas fa-trash-alt"></i></a></td>';
             }
         }
+        // ESTO NO FUNCIONA 
         echo '<td>    
                 <div class="custom-control custom-switch">
                     <input type="checkbox" class="custom-control-input" name="customSwitch-'.$fila['id_productos'].'" id="customSwitch-'.$fila['id_productos'].'">
@@ -41,9 +39,6 @@ class Tabla_comp{
              </td>
              
              ';
-                
-            
-
         echo '</tr>';
         $i++;
         

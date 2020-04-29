@@ -1,128 +1,66 @@
+<?php
+include_once '../conexion.php';
+class Registro{
+    private $id_regs;
+    private $nombre_reg;
+    private $password_reg;
+    private $email_reg;
+    private $telefono_reg;
+    private $direccion_reg;
+    private $cont_us;
+    public function __construct(){
+        
+    }
+    public function comprobar_reg($nombre){
+        $this->nombre_reg=$nombre;
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://kit.fontawesome.com/85cbbbc4f0.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../css/boton.css">
-    <link rel="stylesheet" href="../css/index.css">
-    <title>My Market</title>
-</head>
-
-<body>
-    <!--TEXTO TITULO ACTUAL --------------------------------------------------------------------------------->
-    <div id="menu">
-        <ul>
-            <li><a href="#" class="active">Registros Cliente</a></li>
-        </ul>
-    </div>
-    <!-- SECCION FORM --------------------------------------------------------------------------------------->
-    <div id="formularios">
-        <form action="#" id="form_session" method="post">
-            <!-- php validacion -->
-            <?php
-            $nombre = "";
-            $password = "";
-            $email = "";
-            $telefono = "";
-            $direccion = "";
-            $compr = '';
-            if (isset($_POST['usuario'])) {
-                $nombre = $_POST['usuario'];
-                $password = $_POST['password'];
-                $email = $_POST['email'];
-                $telefono = $_POST['telefono'];
-                $direccion = $_POST['direccion'];
-
-                $campos = array();
-
-                if ($nombre == "") {
-                    array_push($campos, "El campo Nombre no pude estar vacío");
-                }
-                if ($password == "" || strlen($password) <= 5) {
-                    array_push($campos, "El campo Password no puede estar vacío, ni tener menos de 5 caracteres.");
-                }
-                if ($email == "" || strpos($email, "@") === false) {
-                    array_push($campos, "Ingresa un correo electrónico válido.");
-                }
-                if ($telefono == "" || strlen($telefono) <= 5) {
-                    array_push($campos, "El campo telefono no puede estar vacio.");
-                }
-                if ($direccion == "") {
-                    array_push($campos, "Ingresa un direccion.");
-                }
-
-                if (count($campos) > 0) {
-                    echo "<div class='error'>";
-                    for ($i = 0; $i < count($campos); $i++) {
-                        echo "<li>" . $campos[$i] . "</i>";
-                    }
-                } else {
-                    include_once './agregar_us.php';
-
-                    if (isset($_POST['submit'])) {
-                        $nom = $_POST['usuario'];
-                        $pass = $_POST['password'];
-                        $email = $_POST['email'];
-                        $tel = $_POST['telefono'];
-                        $direc = $_POST['direccion'];
-
-                        $comp = new Registro();
-                        $comp ->comprovar($nom);
-
-                        $agregar_us = new Registro();
-                        $agregar_us->insert_reg($nom, $pass, $email, $tel, $direc);
-                    }
-                }
+        $db = new Conexion();
+        $sql = "Select count(*) from usuarios where username = ?";
+        $stmt = $db->prepare($sql);
+        $stmt ->bind_param('s', $this->nombre_reg);
+        $stmt ->execute();
+        $result = $stmt->get_result();
+        $i=0;
+        while ($row = $result->fetch_assoc()) {
+            $this->cont_us[$i] = $row['count(*)'];
+            if ($this->cont_us[$i] > 0) {
+                echo "<div class='error bg-orange text-light p-3 mb-3'>";
+                echo "<li> este usuario ya existe gato </li>";
                 echo "</div>";
+                echo "<a class=''href='./form_reg.php'>Volver a intentar.</a></br></br>";
+                echo "<a href='../index.php'>Ir a Inicio.</a>";
+                die();
             }
-            // fin validacion==================================
+            else {
+                echo "<div class='error bg-success text-light p-3 mb-2'>";
+                echo "<li> Registrado Corretamente perrovich. </li>";
+                echo "</div>";
+                echo "<a class=''href='./form_log.php'>Iniciar sesion.</a></br></br>";
+                echo "<a href='../index.php'>Ir a Inicio.</a>";
+                die();
+            }
+            $i++;
+        }   
+        /* cerrar la sentencia */
+        $stmt->close();
+    }
+    
+    public function insert_reg($nombre, $password, $email, $telefono, $direccion){
+        $this->nombre_reg=$nombre;
+        $this->password_reg=$password;
+        $this->email_reg=$email;
+        $this->telefono_reg=$telefono;
+        $this->direccion_reg=$direccion;
+        // $this->id=$id_r;
+        
+        $hashedPassword = password_hash($this->password_reg, PASSWORD_DEFAULT);
 
-            ?>
-            <!-- fin php validacion -->
-            <!-- usuario -->
-            <p>Usuario:</p>
-            <div class="field-container">
-                <i class="far fa-user fa-lg" aria-hidden="true"></i>
-                <input name="usuario" type="text" class="field" placeholder="usuario1"> <br />
-            </div>
-            <p>Correo electrónico:</p>
-            <div class="field-container">
-                <i class="fa fa-envelope-o fa-lg" aria-hidden="true"></i>
-                <input name="email" type="text" class="field" placeholder="user@example.com"> <br />
-            </div>
-            <!-- password -->
-            <p>Contraseña:</p>
-            <div class="field-container">
-                <i class="fa fa-key fa-lg" aria-hidden="true"></i>
-                <input name="password" type="password" class="field" placeholder="*******"> <br />
-            </div>
-            <!-- telefono -->
-            <p>Telefono:</p>
-            <div class="field-container">
-                <i class="fas fa-phone fa-lg"></i>
-                <input name="telefono" type="number" class="field" placeholder="3874189101"> <br />
-            </div>
-            <!-- telefono -->
-            <p>Direccion:</p>
-            <div class="field-container">
-                <i class="fas fa-location-arrow fa-lg"></i>
-                <input name="direccion" type="text" class="field" placeholder="san remo"> <br />
-            </div>
-            <!-- boton -->
-            <p class="center-content">
-                <input type="hidden" name="accion" value="insert">
-                <input type="submit" name="submit" class="btn btn-green" value="Registrarse"> <br /><br />
-                <a href="login.php">Iniciar sesión</a>
-            </p>
-            <p class="center-content">
-                <a href="../index.php">Volver a inicio.</a>
-            </p>
-        </form>
-    </div>
-    <!-- END SECCION FORM ---------------------------------------------------------------------------------->
-</body>
+        $db = new Conexion();
+        $sql = "INSERT INTO `usuarios`(`username`, `password`, `direccion`, `telefono`, `email`) 
+                VALUES (?,?,?,?,?)";
+        $stmt = $db->prepare($sql);
+        $stmt ->bind_param('sssss', $this->nombre_reg, $hashedPassword, $this->direccion_reg, $this->telefono_reg, $this->email_reg);
+        $stmt ->execute();
 
-</html>
+    }
+}
