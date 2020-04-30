@@ -37,7 +37,7 @@ class Registro{
                 echo "</div>";
                 echo "<a class=''href='./form_log.php'>Iniciar sesion.</a></br></br>";
                 echo "<a href='../index.php'>Ir a Inicio.</a>";
-                die();
+                
             }
             $i++;
         }   
@@ -61,6 +61,12 @@ class Registro{
         $stmt = $db->prepare($sql);
         $stmt ->bind_param('sssss', $this->nombre_reg, $hashedPassword, $this->direccion_reg, $this->telefono_reg, $this->email_reg);
         $stmt ->execute();
+        // if ($stmt) {
+        //     echo 'bien';
+        // }
+        // else{
+        //     echo 'mal';
+        // }
 
     }
 }

@@ -52,12 +52,29 @@ class value{
         $this->existProducto = $exisP;
 
         $this->id_p = $id_p;
-
-        // UPDATE PROD
-        $db = new Conexion();
-        $sql = "update productos set id_tipoP = '$this->tipoProd' ,id_marca = '$this->nameM' ,nombre_prod = '$this->nameProducto', precio = '$this->precioProducto', existencia = '$this->existProducto' where id_productos = '$this->id_p'";
-        $db->query($sql);  
-        header('location: index.php');      
+        
+        foreach($_FILES["archivo"]['tmp_name'] as $key => $tmp_name)
+        {   
+            if($_FILES["archivo"]["name"][$key]) {
+                $filename = $_FILES["archivo"]["name"][$key]; //Obtenemos el nombre original del archivo
+                $source = $_FILES["archivo"]["tmp_name"][$key]; //Obtenemos un nombre temporal del archivo
+                $directorio = './img/'.$this->id_p.'/'.$this->nameProducto.'/';
+                if (!file_exists($directorio)) {
+                    mkdir($directorio, 0777, true) or die("No se puede crear el directorio de extracci&oacute;n");
+                }
+                $dir=opendir($directorio); //Abrimos el directorio de destino
+                $target_path = $directorio.'/'.$filename; //Indicamos la ruta de destino, así como el nombre del archivo
+                if(move_uploaded_file($source, $target_path)) {    
+                    // UPDATE PROD
+                    $db = new Conexion();
+                    $sql = "update productos set id_tipoP = '$this->tipoProd' ,id_marca = '$this->nameM' ,nombre_prod = '$this->nameProducto', precio = '$this->precioProducto', 
+                    existencia = '$this->existProducto', ruta_imagen = '$directorio$filename' where id_productos = '$this->id_p'";
+                    
+                    $db->query($sql);  
+                    header('location: index.php');
+                }
+            }
+        }      
     }
 }                    
 ?>
@@ -90,7 +107,7 @@ class value{
                 <div class="text-muted text-center">
                 - Esto solo editara los productos - 
                 </div>
-                <form action="#" id="form_session" method="post" class=''>
+                <form action="#" id="form_session" method="post" enctype="multipart/form-data" class=''>
                     <!-- php validacion -->
                     <?php
                     if (isset($_POST['submit'])) {
@@ -159,6 +176,12 @@ class value{
                                     ?>">
                         <!-- nombre prod -->
                     </div>
+                    <!-- imagen -->
+                    <div class="form-group">
+                        <label for="exampleFormControlFile1">Imagen de prod:</label>
+                        <input type="file" name="archivo[]" multiple="" class="mx-auto w-50 form-control-file" id="exampleFormControlFile1">
+                    </div>
+                    <!-- PRECIO -->
                     <div class="form-group">
                         <label for="formGroupExampleInput2">Precio: </label>
                         <input name="precioP" type="text" class="form-control mx-auto  w-50" id="formGroupExampleInput2" value="<?php

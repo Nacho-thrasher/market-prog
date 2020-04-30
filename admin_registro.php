@@ -23,7 +23,7 @@
         <div class="row">
             <div class="col-md-8 bg-light mt-4 text-seccondary mx-auto">
                 <h2 class="text-center p-2 ">Agregar productos</h2>
-                <form action="#" id="form_session" method="post">
+                <form action="#" id="form_session" method="post" enctype="multipart/form-data">
                     <!-- php validacion -->
                     <?php
             include_once './admin.php';
@@ -37,11 +37,15 @@
                         $exisP = $_POST['exisP'];
 
                         $reg4 = new admin();
-                        $reg4 ->Prod($tipoP,$nameM, $nameP, $precioP, $exisP);
+                        $reg4 ->Prod($tipoP,$nameM,$nameP, $precioP, $exisP);
+                        // IMAGEN
+                        include_once './imagenes.php';
+                        $img = new Imagenes();
+                        $img ->img($nameP);
+
                     }
             // fin validacion==================================
-
-            ?>
+                ?>
                     <!-- fin php validacion -->
                     <!-- tipo prod -->
                     <div class="row">
@@ -58,8 +62,9 @@
                             </select>
                         </div>
                         <div class="col-6 text-center mt-2 pt-4">
-                                    <button type="button" class="btn btn-white"><a class='text-dark'
-                                    href="./adm-prods/nuevo_tipo.php">Agregar un nuevo tipo <i class="fas fa-plus-circle"></i></a></button>
+                            <button type="button" class="btn btn-white"><a class='text-dark'
+                                    href="./adm-prods/nuevo_tipo.php">Agregar un nuevo tipo <i
+                                        class="fas fa-plus-circle"></i></a></button>
                         </div>
                     </div>
                     <!-- marcas -->
@@ -78,7 +83,8 @@
                         </div>
                         <div class="col-6 text-center mt-2 pt-4">
                             <button type="button" class="btn btn-white"><a class='text-dark'
-                                    href="./adm-prods/nueva_marca.php">Agregar nueva marca <i class="fas fa-plus-circle"></i></a></button>
+                                    href="./adm-prods/nueva_marca.php">Agregar nueva marca <i
+                                        class="fas fa-plus-circle"></i></a></button>
                         </div>
                     </div>
                     <!-- agregar nueva marca con otra consulta -->
@@ -90,6 +96,12 @@
                             placeholder="Descripcion del producto">
                         <!-- nombre prod -->
                     </div>
+                    <!-- imagen -->
+                    <div class="form-group">
+                        <label for="exampleFormControlFile1">Imagen de prod:</label>
+                        <input type="file" name="archivo[]" multiple="" class="mx-auto form-control-file" id="exampleFormControlFile1">
+                    </div>
+                    <!-- precio -->
                     <div class="form-group">
                         <label for="formGroupExampleInput2">Precio: </label>
                         <input name="precioP" type="text" class="form-control" id="formGroupExampleInput2"
@@ -101,10 +113,10 @@
                             placeholder="ej: 2">
                     </div>
                     <div class="form-group text-center">
-                    <button type="button" class="btn btn-primary mr-3"><a class='text-white'
-                                href="index.php">Regresar</a></button>    
-                    <input type="submit" name="submit" class="btn btn-success" value="Guardar Producto">
-                        
+                        <button type="button" class="btn btn-primary mr-3"><a class='text-white'
+                                href="index.php">Regresar</a></button>
+                        <input type="submit" name="submit" class="btn btn-success" value="Guardar Producto">
+
                     </div>
 
                 </form>

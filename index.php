@@ -42,8 +42,16 @@ session_start();
             </ul>
             <span class="navbar-text">
                 <!-- iniciar sesion -->
-                <a class="text-capitalize"
-                    href="./usuarios/form_log.php"><?php echo isset($_SESSION['admin']) ? $_SESSION['admin'] : 'Iniciar Sesion'; ?></a>
+                <?php
+                if (isset($_SESSION['admin'])) {
+                include_once './carrito_us/miCarrito.php';
+                $q = new myMarket();
+                echo $q -> us();
+                }
+                else {
+                    echo '<a class="text-capitalize" href="./usuarios/form_log.php">Iniciar Sesion</a>';
+                }
+                ?>
                 |
                 <!-- ver como mostrar cerrar cuando inicie -->
                 <?php

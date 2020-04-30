@@ -27,8 +27,8 @@ class admin{
         $db1 = new Conexion();
         $sql1 = "INSERT INTO `productos`(`id_tipoP`,`id_marca`, `nombre_prod`,`precio`,`existencia`) VALUES ('$this->tipoProd','$this->nameMarca','$this->nameProducto','$this->precioProducto','$this->existProducto')";
         $db1->query($sql1);
-
-        header('location: index.php');
+        
+        // header('location: index.php');
       
       
     }
