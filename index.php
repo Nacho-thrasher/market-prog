@@ -9,7 +9,8 @@ session_start();
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <!-- css principal -->
     <link rel="stylesheet" href="./css/principal.css">
     <!-- iconos -->
@@ -41,7 +42,8 @@ session_start();
             </ul>
             <span class="navbar-text">
                 <!-- iniciar sesion -->
-                <a class="text-capitalize" href="./usuarios/form_log.php"><?php echo isset($_SESSION['admin']) ? $_SESSION['admin'] : 'Iniciar Sesion'; ?></a>
+                <a class="text-capitalize"
+                    href="./usuarios/form_log.php"><?php echo isset($_SESSION['admin']) ? $_SESSION['admin'] : 'Iniciar Sesion'; ?></a>
                 |
                 <!-- ver como mostrar cerrar cuando inicie -->
                 <?php
@@ -59,85 +61,55 @@ session_start();
     <!-- contenido========================================================================== -->
     <div class="container">
         <div class="row">
-            <div class="col-12 mt-5">
-                <div class="bg-light p-2 text-table shadow-sm rounded">
-                    <div class="title text-center text-success ">
-                      <?php 
+            <div class="col-12 bg-light text-center rounded p-2 mt-4 text-capitalize">
+                <h2>
+                    <?php 
                       if (isset($_SESSION['admin'])) {
                           if ($_SESSION['admin'] == 'Nacho' || $_SESSION['admin'] == 'nacho' || $_SESSION['admin'] == 'NACHO') {
-                            echo '<a href="./admin_registro.php">Agregar productos</a>';
+                            echo '<a href="./admin_registro.php">Agregar productos <i class="fas fa-plus"></i></a>';
                           }
                           else{
-                            echo 'Lista de productos para '.$_SESSION['admin'];
-                          }
+                            echo    '<div class="text-success">
+                                        Lista de productos
+                                        <div class="font-size font-italic text-muted">
+                                        '.$_SESSION['admin'].' te podemos ofrecer
+                                        </div>
+                                    </div>';
+                            }
                       }
                       else{
-                          echo 'Lista de productos';
+                          echo '<div class="text-success">
+                                    Lista de productos
+                                    <div class="font-size font-italic text-muted">
+                                        Para comprar debes iniciar sesion o registrarte
+                                    </div>
+                                </div>';
                       }   
-                      ?>  
-                    </div>
-                    <table class="table table-hover text-green table-borderless ">
-                    <form action="#" id="form1" method="post">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">tipo</th>
-                                <th scope="col">marca</th>
-                                <th scope="col">descripcion</th>
-                                <th scope="col">precio</th>
-                                <th scope="col">unidades</th>
-                                <!-- <th scope="col">anadir <i class="fas fa-cart-plus"></i></th> -->
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                            <?php
-                              if (isset($_SESSION['admin'])) {
-                                include_once './tabla_comprar.php';
-                                $table = new Tabla_comp();
-                                echo $table->tabla();    
-                              }
-                              else{                
-                                include_once './tabla_inicial.php';
-                                $table = new Tabla_ini();
-                                echo $table->tabla();
-                            }
-                            ?>
-                            </tr>
-                        </tbody>
-                    </form>
-    
-                    </table>
-                    <div class="title-2 text-center text-success">
-                    <?php 
-                        if (isset($_SESSION['admin'])) {
-                            if ($_SESSION['admin'] != 'Nacho' & $_SESSION['admin'] != 'nacho' & $_SESSION['admin'] != 'NACHO') {
-                                // anadiendo el boton submitir
-                                include_once 'tabla_comprar.php';
-                                $car = new Tabla_comp();
-                                echo $car->anadir_carrito();
-                                // otra parte
-                                if (isset($_POST['ag_carrito'])) {
-                                    include_once './carrito_us/carrito_us.php';
-
-                                    $prod_carrito = $_POST['anadir'];
-                                    
-                                    $reg4 = new Carrito();
-                                    $reg4 ->carritos($prod_carrito);
-                                }
-                            }
-                        }
-                        else {
-                            echo 'Para comprar debes iniciar sesion o registrarte.';
-                        }
                     ?>
-                    </div>
+                </h2>
+            </div>
+            <div class="col-12 mt-3">
+                <div class="row row-cols-1 row-cols-md-3">
+                    <!--  -->
+                    <?php
+                    if (isset($_SESSION['admin'])) {
+                        include_once './tabla_comprar.php';
+                        $table = new Tabla_comp();
+                        echo $table->tablaCard();    
+                    }
+                    else{                
+                        include_once './tabla_inicial.php';
+                        $table = new Tabla_ini();
+                        echo $table->tablaCard();
+                    }
+                    ?>
+                    <!--  -->
                 </div>
             </div>
         </div>
     </div>
     <!-- =============================== -->
-    
+
 
 
 
