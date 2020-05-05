@@ -53,7 +53,7 @@ session_start();
                 }
                 ?>
                 |
-                <!-- ver como mostrar cerrar cuando inicie -->
+                <!-- cerrar sesion -->
                 <?php
                   if (isset($_SESSION['admin'])) {
                     echo '<a href="./usuarios/cerrar_us.php">Cerrar Sesion</a>';    
@@ -112,6 +112,7 @@ session_start();
                     }
                     ?>
                     <!--  -->
+                    
                 </div>
             </div>
         </div>

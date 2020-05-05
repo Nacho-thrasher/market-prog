@@ -32,10 +32,10 @@ class Registro{
                 die();
             }
             else {
-                echo "<div class='error bg-success text-light p-3 mb-2'>";
-                echo "<li> Registrado Corretamente perrovich. </li>";
+                echo "<div class='error bg-orange text-light p-3 mb-3'>";
+                echo "<li> correcto  </li>";
                 echo "</div>";
-                echo "<a class=''href='./form_log.php'>Iniciar sesion.</a></br></br>";
+                echo "<a class=''href='./form_reg.php'>Volver a intentar.</a></br></br>";
                 echo "<a href='../index.php'>Ir a Inicio.</a>";
                 
             }
